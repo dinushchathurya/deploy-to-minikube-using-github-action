@@ -23,14 +23,21 @@ jobs:
       - name: Deploy to Minikube
         run:
           kubectl apply -f k8s-node-app.yaml
+
+  hold-workflow:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - name: Hold Workflow
+        run: |
+          echo "Workflow is on hold. Waiting for manual finish..."
+          sleep infinity
+
+  test-service-urls:
+    runs-on: ubuntu-latest
+    needs: hold-workflow
+    steps:
       - name: Test service URLs
         run: |
           minikube service list
           minikube service nodejs-app --url
-
-  keep-alive:
-    runs-on: ubuntu-latest
-    needs: job1
-    steps:
-      - name: Keep Alive
-        run: sleep infinity
