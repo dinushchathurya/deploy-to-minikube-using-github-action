@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: nodejs-app
-        image: limarktest/nodejs-docker:latest
+        image: devopshint/node-app:latest
         ports:
           - containerPort: 3000
 ---
@@ -30,8 +30,8 @@ metadata:
 spec:
   selector:
     app: nodejs-app
-  type: ClusterIP
+  type: NodePort
   ports:
-  - protocol: TCP
+  - name: http
     targetPort: 3000
     port: 80
