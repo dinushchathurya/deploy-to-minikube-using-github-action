@@ -28,6 +28,7 @@ jobs:
           minikube service list
           minikube service nodejs-app --url
           echo "------------------opening the service------------------"
+          minikube ip
           curl $(minikube service nodejs-app --url)   
 
 
